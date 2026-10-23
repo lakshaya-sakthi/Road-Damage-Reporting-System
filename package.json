@@ -1,0 +1,30 @@
+{
+  "name": "ai-road-damage-system",
+  "version": "1.0.0",
+  "description": "AI Road Damage Reporting and Maintenance Tracking System",
+  "private": true,
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "install:all": "npm install --prefix server && npm install --prefix client",
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "dev:ai": "uv run --directory ai-service uvicorn main:app --host 0.0.0.0 --port 8000 --reload",
+    "build:client": "npm run build --prefix client",
+    "test:server": "npm test --prefix server",
+    "seed": "node server/src/seed/seedData.js"
+  },
+  "keywords": [
+    "road-damage",
+    "ai",
+    "yolo",
+    "express",
+    "react",
+    "vite",
+    "fastapi"
+  ],
+  "author": "Antigravity Engineering",
+  "license": "MIT"
+}
