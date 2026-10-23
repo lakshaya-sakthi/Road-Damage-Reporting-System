@@ -34,9 +34,21 @@ app.use(
   })
 );
 
+const allowedOrigins = (process.env.CLIENT_ORIGIN || 'http://localhost:5173')
+  .split(',')
+  .map((o) => o.trim())
+  .filter(Boolean);
+
 app.use(
   cors({
-    origin: '*',
+    origin: (origin, callback) => {
+      // Allow server-to-server calls (no origin) and whitelisted origins
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error(`CORS: Origin '${origin}' is not permitted.`));
+      }
+    },
     credentials: true
   })
 );
